@@ -1,29 +1,70 @@
 package com.example.calculator;
-import java.util.Scanner;
 
 public class Quadratics {
-    public static void main(String[] args) {
-    Scanner s = new Scanner(System.in);
-    double[] sam = solve("s.nextLine()");
+    public static String[] solve(String equation) {
 
-    for (int i=0; i < sam.length; i ++){
-        System.out.println(sam[i]);
+        double a;
+        double b;
+        double c;
+
+        int ind = equation.indexOf("x^2");
+
+        if (ind == 0){
+            a = 1.0;
+            equation = equation.substring(2);
+        } else {
+            String term = equation.substring(0, ind);
+
+            if (term.substring(1) == "+"){
+                a = Double.parseDouble(term.substring(1));
+            } else {
+                a = Double.parseDouble(term);
+            }
+
+            equation = equation.substring(ind + 3);
         }
-    }
 
-    public static double[] solve(String equation) {
-        String[] equationElements = equation.split("");
+        ind = equation.indexOf("x");
+        if (ind == 0){
+            b = 1.0;
+            equation = equation.substring(0);
+        } else {
+            String term = equation.substring(0, ind);
 
-        int a = 1;
-        int b = 2;
-        int c = -63;
+            if (term.substring(1) == "+"){
+                b = Double.parseDouble(term.substring(1));
+            } else {
+                b = Double.parseDouble(term);
+            }
+            equation = equation.substring(ind + 1);
+        }
 
-        double sol1 = ((b*(-1)) + Math.sqrt(b*b-4*a*c))/(2*a);
-        double sol2 = ((b*(-1)) - Math.sqrt(b*b-4*a*c))/(2*a);
 
-        double[] answers = {sol1, sol2};
+        if (equation.substring(1) == "+"){
+            c = Double.parseDouble(equation.substring(1));
+        } else {
+            c = Double.parseDouble(equation);
+        }
 
-        return answers;
+        double sol1;
+        double sol2;
+        boolean isSolution = ((b * b - 4 * a * c) > 0);
+
+        String [] solution = {"", ""};
+
+        if (isSolution) {
+            double discriminant = Math.sqrt(b * b - 4 * a * c);
+
+            sol1 = ((b * (-1)) + discriminant) / (2 * a);
+            sol2 = ((b * (-1)) - discriminant) / (2 * a);
+
+        } else {
+            String ans[] = {"NULL", "NULL"};
+            return ans;
+        }
+
+        String ans[] = {String.valueOf(sol1), String.valueOf(sol2)};
+        return ans;
     }
 }
 

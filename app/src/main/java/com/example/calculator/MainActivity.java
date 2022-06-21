@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.first:
                 Toast.makeText(this, "Pressed", Toast.LENGTH_LONG).show();
             default:
-                break;
+                buttonFilter(0);
         }
     }
 
@@ -25,5 +25,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Button first = findViewById(R.id.first);
         first.setOnClickListener(this);
+    }
+
+    public void buttonFilter(int tag){
+
     }
 }
