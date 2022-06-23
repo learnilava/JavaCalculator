@@ -1,11 +1,13 @@
 package com.example.calculator;
 
 public class Quadratics {
-    public static String[] solve(String equation) {
+    public static String solve(String equation) {
 
         double a;
         double b;
         double c;
+
+//        if
 
         int ind = equation.indexOf("x^2");
 
@@ -32,9 +34,9 @@ public class Quadratics {
             String term = equation.substring(0, ind);
 
             if (term.substring(1) == "+"){
-                b = Double.parseDouble(term.substring(1));
+                b = Double.parseDouble(term.substring(2));
             } else {
-                b = Double.parseDouble(term);
+                b = Double.parseDouble(term.substring(1));
             }
             equation = equation.substring(ind + 1);
         }
@@ -50,8 +52,6 @@ public class Quadratics {
         double sol2;
         boolean isSolution = ((b * b - 4 * a * c) > 0);
 
-        String [] solution = {"", ""};
-
         if (isSolution) {
             double discriminant = Math.sqrt(b * b - 4 * a * c);
 
@@ -59,11 +59,28 @@ public class Quadratics {
             sol2 = ((b * (-1)) - discriminant) / (2 * a);
 
         } else {
-            String ans[] = {"NULL", "NULL"};
-            return ans;
+            return "null";
         }
 
-        String ans[] = {String.valueOf(sol1), String.valueOf(sol2)};
+        String ans = "";
+
+        if (sol1 > 0){
+            ans += "(X + " + String.valueOf(sol1) + ")";
+        } else if (sol1 < 0){
+            ans += "(X + " + String.valueOf(sol1) + ")";
+        } else if (sol1 == 0){
+            ans += "X";
+        }
+
+
+        if (sol2 > 0){
+            ans += "(X + " + String.valueOf(sol2) + ")";
+        } else if (sol2 < 0){
+            ans += "(X + " + String.valueOf(sol2) + ")";
+        } else if (sol2 == 0){
+            ans += "X";
+        }
+
         return ans;
     }
 }
